@@ -18,7 +18,7 @@ class UserController extends Controller
    }
    public function create()
    {
-    return view ('user.register');
+    return view('user.register');
    }
    public function store(Request $request)
    {
@@ -30,12 +30,12 @@ class UserController extends Controller
         'email'=>'required|unique:users|email',
         'password'=>'required|confirmed',
     ]);
-    //save in uset table
+    //save in user table
     User::create([
         'name'=>$request->name,
         'phone'=>$request->phone,
         'email'=>$request->email,
-        'password'=>\Hash::make($request->password),
+        'password'=>Hash::make($request->password),
 
     ]);
 
@@ -52,17 +52,12 @@ class UserController extends Controller
        if ($user) {
            return redirect('user.welcome');
        }else{
-           return redirect('/');
+           return redirect('/login');
        }
    }
   public function login(Request $request)
   {
-    //validate data
-
-    $request->validate([
-        'name'=>'required',
-        'password'=>'required',
-    ]);
+    return view('user.login');
  }
  public function logout()
  {

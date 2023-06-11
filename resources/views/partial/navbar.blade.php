@@ -61,7 +61,7 @@
                 @if(Auth::check())
                 <button class="btn btn-outline-danger" type="submit">Logout</button>
                 @else
-                <a class="btn btn-outline-info" type="submit" href="/login.html">Login</a>
+                <a class="btn btn-outline-info" type="submit" href="/login">Login</a>
 
                 @endif
             </div>

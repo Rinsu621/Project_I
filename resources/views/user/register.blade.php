@@ -1,3 +1,4 @@
+
 <div class="form-body">
     <div class="row">
         <div class="form-holder">
@@ -6,7 +7,7 @@
                     <h3>Register Today</h3>
                     <p>Fill in the data below.</p>
                     <form action="/login" method="POST">
-
+                        @csrf
                         <div class="col-md-12">
                            <input class="form-control" type="text" name="name" placeholder="Full Name" required>
                         </div>
@@ -21,8 +22,8 @@
                           <input class="form-control" type="password" name="password" placeholder="Password" required>
                        </div><br>
 
-                        <div class="form-button mt-3">
-                            <button id="submit" type="submit" class="btn btn-warning">Register</button>
+                        <div class="form-button ">
+                            <button id="submit" type="submit" class="btn btn-outline">Register</button>
                         </div>
                     </form>
                 </div>
@@ -43,7 +44,7 @@
 
 html, body {
     height: 100%;
-    background-color: #152733;
+    background-color: #17A2B8;
     overflow: hidden;
 }
 
@@ -129,17 +130,18 @@ html, body {
 }
 
 
-.btn-primary{
-    background-color: #6C757D;
-    outline: none;
-    border: 0px;
-     box-shadow: none;
+.btn-outline{
+    background-color:  #17A2B8;
+    border-color: #FFC107;
+    border-radius: 20px;
+    padding: 10px;
+    color:white;
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
-    background-color: #495056;
-    outline: none !important;
-    border: none !important;
+.btn-outline:hover, .btn-outline:active{
+    background-color: #FFC107;
+    border-radius: 20px;
+    padding: 10px;
      box-shadow: none;
 }
 

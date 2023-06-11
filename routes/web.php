@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Route::get('/',[UserController::class,'first']);
 Route::get('/login',[UserController::class,'login']);
-Route::post('/login',[UserController::class,'login']);
-Route::get('/register',[UserController::class,'create']);
+Route::post('/login',[UserController::class,'attemptlogin']);
+Route::get('/register',[UserController::class,'create'])->name('register');
 Route::post('/register',[UserController::class,'store']);
 Route::post('/login', [UserController::class, 'attemptLogin']);
