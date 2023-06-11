@@ -20,8 +20,8 @@ Route::get('/', function () {
 
 
 Route::get('/',[UserController::class,'first']);
-Route::get('/login',[UserController::class,'login']);
-Route::post('/login',[UserController::class,'login']);
-Route::get('/register',[UserController::class,'create']);
-Route::post('/register',[UserController::class,'store']);
+Route::get('/login',[UserController::class,'loginPage'])->name('loginPage');
+Route::post('/login/store',[UserController::class,'loginStore'])->name('loginStore');
+Route::get('/register',[UserController::class,'create'])->name('register.create');
+Route::post('/register',[UserController::class,'store'])->name('register.store');
 Route::post('/login', [UserController::class, 'attemptLogin']);

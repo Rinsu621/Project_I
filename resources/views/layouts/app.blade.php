@@ -11,9 +11,11 @@
     <title>SmartSpec</title>
   </head>
   <body>
-    @include('partial.navbar')
 
-    @yield('content')
+    <div class="container">
+      @include('partial.navbar')
+      @yield('content')      
+    </div>
 
      <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

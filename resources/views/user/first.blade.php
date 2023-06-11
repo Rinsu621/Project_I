@@ -7,10 +7,11 @@
         <div class="carousel-caption d-none d-md-block">
           <h1 class="animated bounceInRight text-dark" style="animation-delay:10s">Navigate the Mobile Jungle with Ease</h1>
           {{-- use anchor for get requests --}}
-          <form action="/register" method="POST">
+          <a href="{{route('register.create')}}" class="btn btn-outline-warning" style="animation-delay:10s">Register</a>
+          {{-- <form action="/register" method="POST">
             @csrf
             <button type="button" class="btn btn-outline-warning" style="animation-delay:10s">Register</button>
-        </form>
+        </form> --}}
         </div>
       </div>
 @endsection

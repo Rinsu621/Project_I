@@ -8,7 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\UserCreated;
-
+use Exception;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -23,23 +24,35 @@ class UserController extends Controller
    public function store(Request $request)
    {
      //validate
-     $request->validate
-     ([
+     $validator = Validator::make($request->all(), [       
         'name'=>'required',
         'password'=>'required|regex:/^[0-9]{10}$/|unique',
         'email'=>'required|unique:users|email',
-        'password'=>'required|confirmed',
+        'password'=>'required',
+        // 'password'=>'required|confirmed', //use confirmed rule when you have password confirmation input in your form
     ]);
-    //save in uset table
-    User::create([
-        'name'=>$request->name,
-        'phone'=>$request->phone,
-        'email'=>$request->email,
-        'password'=>\Hash::make($request->password),
+    //if validation fails
+    if($validator->fails()){
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+    //try creating user
+    try{
+        User::create([
+            'name'=>$request->name,
+            'phone'=>$request->phone,
+            'email'=>$request->email,
+            'password'=>\Hash::make($request->password),    
+        ]);
+        return redirect()->route('loginPage')->withSuccess('Registration complete. Please Login.');
 
-    ]);
-
-
+    }catch(Exception $e){ 
+        //catch errors if any occurs when creating user
+        //you can check this by removing the email line when creating user
+        return redirect()->back()->withErrors($e->getMessage())->withInput();
+    }
+   }
+   public function loginPage(){
+    return view ('user.login');
    }
    public function attemptLogin(Request $request)
    {

@@ -6,7 +6,7 @@
     navbar-light bg-light">
         <div class="container">
         <a
-        href="#" class="navbar-brand mb-0 h1">
+        href="/" class="navbar-brand mb-0 h1">
             <img class="d-inline-block align-top" src="7866229_Mesa de trabajo 1.png" width="40" height="40">SmartSpec</a>
             @if(Auth::check())
     <button
