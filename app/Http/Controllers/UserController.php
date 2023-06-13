@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\UserCreated;
+use Exception;
+use Illuminate\Support\Facades\Validator;
 
 
 class UserController extends Controller
@@ -16,6 +18,10 @@ class UserController extends Controller
    {
     return view('user.first');
    }
+   public function main()
+   {
+    return view('user.welcome');
+   }
    public function create()
    {
     return view('user.register');
@@ -23,14 +29,18 @@ class UserController extends Controller
    public function store(Request $request)
    {
      //validate
-     $request->validate
-     ([
+    $validator=Validator::make($request->all(),[
         'name'=>'required',
         'password'=>'required|regex:/^[0-9]{10}$/|unique',
         'email'=>'required|unique:users|email',
-        'password'=>'required|confirmed',
+        'password'=>'required',
     ]);
+    if($validator->fails())
+    {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
     //save in user table
+    try{
     User::create([
         'name'=>$request->name,
         'phone'=>$request->phone,
@@ -39,7 +49,16 @@ class UserController extends Controller
 
     ]);
 
-
+     return redirect()->route('loginPage')->withSuccess("Registration complete.Please Login.");
+    }
+    catch(Exception $e)
+    {
+        return redirect()->back()->withErrors($e->getMessage())->withInput();
+    }
+   }
+   public function loginPage()
+   {
+    return view('user.login');
    }
    public function attemptLogin(Request $request)
    {
@@ -50,18 +69,22 @@ class UserController extends Controller
        ]);
 
        if ($user) {
-           return redirect('user.welcome');
+           return redirect()->route('welcome');
        }else{
-           return redirect('/login');
+           return redirect()->route('loginPage');
        }
    }
   public function login(Request $request)
   {
-    return view('user.login');
+    $request->validate([
+        'name'=>'required',
+        'password'=>'required',
+    ]);
  }
  public function logout()
  {
      Auth::logout();
      return redirect('/');
  }
+
 }

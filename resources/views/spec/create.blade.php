@@ -1,3 +1,5 @@
+@extends('layouts.app2')
+@section('content')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <div class="form-body mx-auto col-10 col-md-8 col-lg-6">
@@ -5,35 +7,30 @@
         <div class="form-holder">
             <div class="form-content">
                 <div class="form-items">
-                    <h3>Register Today</h3>
-                    <p>Fill in the data below.</p>
-                    @if($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{$error}}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-                    <form action="{{route('register.store')}}" method="POST">
+                    <h3>Create Specification</h3>
+                    <form action="/spec" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-12">
-                           <input class="form-control" type="text" name="name" placeholder="Full Name" required>
-                        </div>
+                           <input class="form-control" type="text" name="name" placeholder="Name" required>
+                        </div><br>
                         <div class="col-md-12">
-                            <input class="form-control" type="text" name="phone" placeholder="Number" required>
-                         </div>
-
+                           <select name="brand_id" id="brand_id" class="form-control">
+                            @foreach ($brands as $brand )
+                                <option value="{{$brand->id}}">{{$brand->name}}</option>
+                            @endforeach
+                           </select>
+                        </div><br>
                         <div class="col-md-12">
-                            <input class="form-control" type="email" name="email" placeholder="E-mail Address" required>
-                        </div>
-                       <div class="col-md-12">
-                          <input class="form-control" type="password" name="password" placeholder="Password" required>
-                       </div><br>
-
+                            <input class="form-control" type="text" name="price" placeholder="Price" required>
+                         </div><br>
+                         <div class="col-md-12">
+                            <input class="form-control datepicker" type="date" name="launch" placeholder="Launch Date" required>
+                         </div><br>
+                         <div class="col-md-12">
+                            <input class="form-control" type="file" name="image" placeholder="Image" required>
+                         </div><br>
                         <div class="form-button ">
-                            <button id="submit" type="submit" class="btn btn-outline">Register</button>
+                            <button id="submit" type="submit" class="btn btn-outline-warning">Add</button>
                         </div>
                     </form>
                 </div>
@@ -193,3 +190,5 @@ html, body {
    color: #2acc80;
 }
 </style>
+
+@endsection

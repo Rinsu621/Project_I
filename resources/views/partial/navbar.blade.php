@@ -1,13 +1,10 @@
-
-<style>
-
-</style>
+<div class="d-flex">
     <nav class="navbar fixed-top navbar-expand-sm
     navbar-light bg-light">
         <div class="container">
         <a
-        href="#" class="navbar-brand mb-0 h1">
-            <img class="d-inline-block align-top" src="7866229_Mesa de trabajo 1.png" width="40" height="40">SmartSpec</a>
+        href="/" class="navbar-brand mb-0 h1">
+            <img class="d-inline-block align-top" src="{{asset('7866229_Mesa de trabajo 1.png')}}" width="40" height="40">SmartSpec</a>
             @if(Auth::check())
     <button
     type="button"
@@ -59,12 +56,18 @@
             @endif
             <div>
                 @if(Auth::check())
-                <button class="btn btn-outline-danger" type="submit">Logout</button>
+                <form action="{{route('logout')}}" method="POST">
+                    @csrf
+                <div class="form-button mt-3">
+                    <button id="submit" type="submit" class="btn btn-outline-danger">Logout</button>
+                </div>
+                </form>
                 @else
-                <a class="btn btn-outline-info" type="submit" href="/login">Login</a>
+                <a class="btn btn-outline-info" type="submit" href="{{route('loginPage')}}">Login</a>
 
                 @endif
             </div>
         </div>
     </nav>
+</div>
 
